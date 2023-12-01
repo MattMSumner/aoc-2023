@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { DayOne } from "./DayOne";
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { DayOne } from './DayOne'
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         </Routes>
       </div>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App
