@@ -49,10 +49,13 @@ function valid(handful: Handful): boolean {
   return handful.red <= 12 && handful.blue <= 14 && handful.green <= 13
 }
 
+function power(handful: Handful): number {
+  return handful.red * handful.green * handful.blue
+}
+
 export const DayTwo = () => {
   return (
     <div>
-      <h1>Part One</h1>
       <p>12 red cubes, 13 green cubes, and 14 blue cubes</p>
       {inputToObjects.map(({ gameId, handful }) => (
         <div key={gameId}>
@@ -62,12 +65,19 @@ export const DayTwo = () => {
           <p>
             Green: {handful.green}, Red: {handful.red}, Blue: {handful.blue}
           </p>
+          <p>Power: {power(handful)}</p>
         </div>
       ))}
+      <h1>Part One</h1>
       Result:{' '}
       {inputToObjects
         .filter(({ handful }) => valid(handful))
         .reduce((sum, { gameId }) => sum + gameId, 0)}
+      <h1>Part Two</h1>
+      Result:{' '}
+      {inputToObjects
+        .map(({ handful }) => power(handful))
+        .reduce((sum, power) => sum + power, 0)}
     </div>
   )
 }
