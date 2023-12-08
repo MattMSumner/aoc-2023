@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom'
 import { DayOne } from './DayOne'
 import { DayTwo } from './DayTwo'
+import { DayThree } from './DayThree'
 
 function App() {
   return (
@@ -19,12 +20,16 @@ function App() {
             <li>
               <Link to="/day_two">Day 2</Link>
             </li>
+            <li>
+              <Link to="/day_three">Day 3</Link>
+            </li>
           </ul>
         </nav>
 
         <Routes>
           <Route path="/day_one" element={<DayOne />} />
           <Route path="/day_two" element={<DayTwo />} />
+          <Route path="/day_three" element={<DayThree />} />
         </Routes>
       </div>
     </Router>
