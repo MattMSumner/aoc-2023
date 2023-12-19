@@ -1,0 +1,44 @@
+import { input } from './DayFour/input'
+
+type Card = {
+  name: string
+  winningNumbers: number[]
+  inputNumbers: number[]
+}
+
+const cards = input.split('\n').map<Card>((line) => {
+  const [name, numberStrings] = line.split(/:\s+/)
+  const [winningString, inputString] = numberStrings.split(/\s+\|\s+/)
+
+  return {
+    name,
+    winningNumbers: winningString.split(/\s+/).map((x) => parseInt(x)),
+    inputNumbers: inputString.split(/\s+/).map((x) => parseInt(x)),
+  }
+})
+
+function score(card: Card): number {
+  const wins = card.inputNumbers.filter((inputNumber) =>
+    card.winningNumbers.includes(inputNumber)
+  ).length
+  if (wins === 0) {
+    return 0
+  } else {
+    return 2 ** (wins - 1)
+  }
+}
+
+export const DayFour = () => {
+  return (
+    <div>
+      <h1>Part One</h1>
+      <h2>Card Scores</h2>
+      {cards.map((card) => (
+        <div key={card.name}>
+          {card.name}: {score(card)}
+        </div>
+      ))}
+      <p>Result: {cards.reduce((sum, card) => sum + score(card), 0)}</p>
+    </div>
+  )
+}
