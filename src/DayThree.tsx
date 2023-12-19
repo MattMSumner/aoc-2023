@@ -77,8 +77,6 @@ const validGears = matrix.symbols.reduce<Array<[Sym, Part[]]>>(
   []
 )
 
-console.log({ matrix, partString, x, y, validParts })
-
 export const DayThree = () => {
   return (
     <div>
