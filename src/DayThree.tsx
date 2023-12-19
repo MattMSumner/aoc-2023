@@ -66,6 +66,17 @@ const validParts = matrix.parts.filter((part) =>
   matrix.symbols.some((sym) => adjacent(part, sym))
 )
 
+const validGears = matrix.symbols.reduce<Array<[Sym, Part[]]>>(
+  (collection, sym) => {
+    const adjacentParts = matrix.parts.filter((part) => adjacent(part, sym))
+    if (adjacentParts.length === 2) {
+      collection.push([sym, adjacentParts])
+    }
+    return collection
+  },
+  []
+)
+
 console.log({ matrix, partString, x, y, validParts })
 
 export const DayThree = () => {
@@ -80,6 +91,22 @@ export const DayThree = () => {
       ))}
       <p>
         Result: {validParts.reduce((sum, part) => sum + part.partNumber, 0)}
+      </p>
+
+      <h1>Part Two</h1>
+      <h2>Valid Gears</h2>
+      {validGears.map(([gear, parts]) => (
+        <div key={`${gear.x},${gear.y}`}>
+          {gear.x}, {gear.y} - {parts[0].partNumber * parts[1].partNumber}
+        </div>
+      ))}
+      <p>
+        Result:{' '}
+        {validGears.reduce(
+          (sum, [_gear, parts]) =>
+            sum + parts[0].partNumber * parts[1].partNumber,
+          0
+        )}
       </p>
     </div>
   )
